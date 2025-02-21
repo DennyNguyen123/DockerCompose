@@ -1,0 +1,18 @@
+services:
+  cloudflaretunnel:
+    container_name: cloudflare-tunnel
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+    volumes:
+      - ./cloudflared:/etc/cloudflared/
+    command: tunnel --no-autoupdate run
+      #pid: host
+      # network_mode: "host"
+    networks:
+      - my_tunnel   # Đảm bảo tên mạng khớp với khai báo ở dưới
+
+networks:
+  my_tunnel:
+      external: true   # Chỉ ra mạng đã có sẵn

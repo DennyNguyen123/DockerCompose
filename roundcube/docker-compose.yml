@@ -1,0 +1,15 @@
+services:
+  roundcube:
+    image: roundcube/roundcubemail:latest
+    container_name: roundcube
+    restart: always
+    environment:
+      - ROUNDCUBEMAIL_DB_TYPE=sqlite
+      - ROUNDCUBEMAIL_SKIN=elastic
+      - ROUNDCUBEMAIL_DEFAULT_HOST=tls://smtp.mlog.online
+      - ROUNDCUBEMAIL_SMTP_SERVER=tls://smtp.mlog.online        
+    volumes:
+      - ./roundcube-data:/var/roundcube/db
+      - ./www:/var/www/html
+    ports:
+      - "8424:80"
