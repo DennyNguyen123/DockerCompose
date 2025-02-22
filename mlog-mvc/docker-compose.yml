@@ -3,7 +3,9 @@ services:
     image: mlog-mvc:2.2
     container_name: mlog-mvc
     ports:
-      - "8080:8080"
+      - "127.0.0.1:8080:8080"
+    expose:
+      - "8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
       - DB_TYPE=${DB_TYPE}
@@ -12,12 +14,4 @@ services:
       - ./Data:/data:rw
       - /etc/localtime:/etc/localtime:ro
     restart: always
-    networks:
-      - mlog-mvc_network
-      - default
-
-networks:
-  mlog-mvc_network:
-    external: true
-    name : my_tunnel
 
